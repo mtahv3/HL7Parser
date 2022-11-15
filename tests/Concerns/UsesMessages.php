@@ -9,6 +9,11 @@ trait UsesMessages
         return file_get_contents(__DIR__ . '/../messages/adt.txt');
     }
 
+    protected function getAdtMessageWithEmptyLines() : string
+    {
+        return file_get_contents(__DIR__ . '/../messages/adtemptylines.txt');
+    }
+
     protected function getNonPipeMessage() : string
     {
         return file_get_contents(__DIR__ . '/../messages/adtnonpipe.txt');

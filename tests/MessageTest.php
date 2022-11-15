@@ -15,8 +15,19 @@ class MessageTest extends TestCase
     {
         $adt = $this->getAdtMessage();
         $lines = explode(PHP_EOL, $adt);
+        $lines = array_filter($lines); //removes blank lines
         $message = new Message($adt);
         $this->assertEquals(count($lines) - 1, count($message->getSegments()));
+    }
+
+    public function testItWorksWithMessagesThatHaveEmptyNewlines()
+    {
+        $adt = $this->getAdtMessageWithEmptyLines();
+        $lines = explode(PHP_EOL, $adt);
+        $lines = array_filter($lines); //removes blank lines
+        $message = new Message($adt);
+        $this->assertEquals(count($lines) - 1, count($message->getSegments()));
+        $this->assertEquals('ADT', $message->getMessageHeader()->getMessageType());
     }
 
     public function testMessagesMustStartWithMSHSegment()
