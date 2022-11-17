@@ -26,9 +26,19 @@ class Segment
         $this->parse();
     }
 
+    public function getSeparators() : SeparatorsInterface
+    {
+        return $this->separators;
+    }
+
     public function getName() : string
     {
         return $this->name;
+    }
+
+    public function getFields() : array
+    {
+        return $this->fields;
     }
 
     public function getField(int $index) : Field
@@ -67,6 +77,11 @@ class Segment
         foreach ($fields as $i => $field) {
             if ($i === 0) {
                 $this->name = $field;
+                if ($this->name === MessageHeader::MSH) {
+                    $this->fields[] = new Field($field, $this->separators);
+                    $this->fields[] = new Field('|', $this->separators);
+                    continue;
+                }
             }
             $this->fields[] = new Field($field, $this->separators);
         }

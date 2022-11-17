@@ -22,6 +22,11 @@ class Field
         $this->parse();
     }
 
+    public function getComponents() : array
+    {
+        return $this->components;
+    }
+
     public function getComponent(int $index, int $repeatedIndex = 1) : Component
     {
         if (isset($this->components[$repeatedIndex], $this->components[$repeatedIndex][$index])) {

@@ -21,6 +21,7 @@ class MessageHeader extends Segment implements SeparatorsInterface
         parent::__construct($segmentString, $this);
         $this->validateHeader();
         $this->parseSeparators();
+        $this->setIdentifier('MSH');
     }
 
     public function getDateTimeOfMessage() : string
@@ -81,7 +82,6 @@ class MessageHeader extends Segment implements SeparatorsInterface
     protected function parseFieldSeparator(string $segmentString) : void
     {
         $this->fieldSeparator = substr($segmentString, 3, 1);
-        $this->fields[] = new Field($this->fieldSeparator);
     }
 
     protected function parseSeparators() : void

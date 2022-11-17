@@ -11,7 +11,7 @@ class Component
 
     protected array $subComponents = [];
     protected bool $hasSubComponent = false;
-    protected string $value;
+    protected ?string $value = null;
     protected string $identifier = '';
 
     public function __construct(protected $componentString, protected ?SeparatorsInterface $separators = null)
@@ -21,6 +21,11 @@ class Component
         }
 
         $this->parse();
+    }
+
+    public function getSeparators() : SeparatorsInterface
+    {
+        return $this->separators;
     }
 
     public function getRawString() : string

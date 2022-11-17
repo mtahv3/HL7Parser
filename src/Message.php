@@ -50,8 +50,12 @@ class Message
     public function getValueByIdentifier(string $identifier) : ?string
     {
         $parser = new IdentifierParser($identifier);
-        $value = $this->getSegmentByName($parser->getSegmentName(), $parser->getSegmentRepeatedIndex())
-            ->getField($parser->getFieldIndex());
+        if ($parser->getSegmentName() === MessageHeader::MSH) {
+            $value = $this->getMessageHeader();
+        } else {
+            $value = $this->getSegmentByName($parser->getSegmentName(), $parser->getSegmentRepeatedIndex());
+        }
+        $value = $value->getField($parser->getFieldIndex());
 
         if ($parser->getComponentIndex()) {
             $value = $value->getComponent($parser->getComponentIndex(), $parser->getFieldRepeatedIndex());
