@@ -22,6 +22,11 @@ class Field
         $this->parse();
     }
 
+    public function getSeparators() : SeparatorsInterface
+    {
+        return $this->separators;
+    }
+
     public function getComponents() : array
     {
         return $this->components;
