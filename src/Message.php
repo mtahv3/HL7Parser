@@ -69,7 +69,7 @@ class Message
 
     protected function parse() : void
     {
-        $segmentLines = preg_split('/(\n)/', $this->messageString, -1, PREG_SPLIT_NO_EMPTY);
+        $segmentLines = preg_split('/(\n|\r\n)/', $this->messageString, -1, PREG_SPLIT_NO_EMPTY);
         $this->messageHeader = new MessageHeader($segmentLines[0]);
         foreach ($segmentLines as $i => $segmentString) {
             //ignore header line
